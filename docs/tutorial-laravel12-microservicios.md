@@ -5,16 +5,12 @@
 **Requisitos previos:** PHP, Composer, terminal  
 **Tecnologías:** Laravel 12, Jetstream API, SQLite, Pest, Spatie Permission
 
----
-
 ## Objetivos de Aprendizaje
 
 - Crear un proyecto Laravel optimizado para microservicios sin frontend  
 - Implementar autenticación segura mediante bearer token  
 - Configurar autorización basada en roles con Spatie Permission  
 - Desarrollar y probar APIs REST con Pest
-
----
 
 ## 1. Instalación del Proyecto
 
@@ -32,11 +28,7 @@
 ### 1.2. Crear el proyecto base
 
 ```bash
-laravel new microservicios-api \
-  --jet \
-  --api \
-  --verification \
-  --pest
+laravel new microservicios-api --api --verification --pest --quiet --database=sqlite
 ```
 
 **Idem para Windows**
@@ -47,8 +39,6 @@ Este comando genera:
 - Jetstream API para autenticación
 - Verificación por email
 - Pruebas preconfiguradas con Pest
-
----
 
 ## 2. Configuración Inicial
 
@@ -72,6 +62,7 @@ ADMIN_PASSWORD=secret123
 ```
 
 > **Nota:** `MAIL_USERNAME` y `MAIL_PASSWORD` se obtienen de Mailtrap.
+![Ejemplo](image.png)
 
 ### 2.2. Migraciones y base SQLite
 
@@ -80,8 +71,6 @@ php artisan migrate
 ```
 
 Si el archivo de base no existe, Laravel preguntará si desea crearlo.
-
----
 
 ## 3. Autenticación con Jetstream API
 
@@ -92,8 +81,6 @@ Jetstream API:
 - Usa `auth:sanctum` como middleware
 - Provee endpoints `/register`, `/login`, `/user`, etc.
 
----
-
 ## 4. Autorización con Spatie Permission
 
 ### 4.1. Instalar la librería
@@ -102,6 +89,11 @@ Jetstream API:
 composer require spatie/laravel-permission
 ```
 
+> **Nota:** Si el comando muestra el siguiente warning, puedes instalar 7zip para evitarlo:
+![alt text](image-1.png) 
+`sudo apt update`
+`sudo apt install p7zip-full`
+
 ### 4.2. Publicar y migrar
 
 ```bash
@@ -109,27 +101,70 @@ php artisan vendor:publish --provider="Spatie\\Permission\\PermissionServiceProv
 php artisan migrate
 ```
 
----
+### 4.3. Configurar el modelo `User`
+Edita el modelo `User.php` para incluir los traits necesarios, los cuales permiten manejar roles y permisos, éstos son:
+
+- `HasRoles`: para manejar roles y permisos
+- `MustVerifyEmail`: para que el usuario deba verificar su email antes de poder iniciar sesión. Esto es útil para asegurar que los usuarios son quienes dicen ser.
+- `Notifiable`: para notificaciones
+- `HasFactory`: para usar fábricas de modelos
+
+```php
+<?php
+namespace App\Models;
+
+use Illuminate\Auth\MustVerifyEmail;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
+class User extends Authenticatable
+{
+    use HasFactory, Notifiable, HasRoles, MustVerifyEmail;
+
+    protected $fillable = ['name','email','password'];
+
+    protected $hidden = ['password','remember_token'];
+
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
+}
+```
+
+> **Nota:** En el código anterior, `$fillable` define los campos que se pueden asignar masivamente, mientras que `$hidden` oculta los campos sensibles como la contraseña y el token de recordatorio. El método `casts` convierte automáticamente el `campo email_verified_at` a un objeto `DateTime`, y el campo `password` se almacena de forma segura.
 
 ## 5. Seeder de Usuario Administrador
 
 ### 5.1. Editar `DatabaseSeeder.php`
 
 ```php
+<?php
+namespace Database\Seeders;
+
 use App\Models\User;
+use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
-public function run(): void
+class DatabaseSeeder extends Seeder
 {
-    Role::firstOrCreate(['name' => 'admin']);
-    Role::firstOrCreate(['name' => 'user']);
+    public function run(): void
+    {
+        Role::firstOrCreate(['name' => 'admin']);
+        Role::firstOrCreate(['name' => 'user']);
 
-    $admin = User::firstOrCreate(
-        ['email' => env('ADMIN_EMAIL')],
-        ['name' => 'Administrador', 'password' => bcrypt(env('ADMIN_PASSWORD'))]
-    );
+        $admin = User::firstOrCreate(
+            ['email' => env('ADMIN_EMAIL')],
+            ['name' => 'Administrador', 'password' => bcrypt(env('ADMIN_PASSWORD'))]
+        );
 
-    $admin->assignRole('admin');
+        $admin->assignRole('admin');
+    }
 }
 ```
 
@@ -139,19 +174,16 @@ public function run(): void
 php artisan db:seed
 ```
 
----
+### 5.3. Verificar el usuario
+Puedes verificar con la herramienta Tinker que el usuario administrador se creó correctamente ejecutando:
 
-## 6. Estructura del Proyecto
+> **Nota:** Tinker es una herramienta de Laravel que permite interactuar con la base de datos y el modelo de forma interactiva.
 
-| Característica             | Laravel Tradicional | Laravel Jetstream API-only |
-|---------------------------|---------------------|-----------------------------|
-| Vistas Blade              | Sí                  | No                          |
-| Frontend (Inertia/Vue)    | Opcional            | No                          |
-| Middleware web            | Sí                  | Parcial                     |
-| Autenticación por tokens  | No (por defecto)    | Sí                          |
-| Microservicios            | No                  | Sí                          |
+```bash
+php artisan tinker
+```
 
----
+![alt text](image-2.png)
 
 ## 7. Pruebas con Pest
 
@@ -188,8 +220,6 @@ it('permite registrar y loguear un usuario', function () {
 ```bash
 php artisan test
 ```
-
----
 
 ## 8. Microservicio de Ejemplo: Proyectos
 
@@ -253,8 +283,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 });
 ```
 
----
-
 ## 9. Pruebas con Pest: Autorización
 
 Archivo: `tests/Feature/ProyectoTest.php`
@@ -290,8 +318,6 @@ it('usuario sin rol no accede a /proyectos', function () {
 });
 ```
 
----
-
 ## 10. Documentación Manual de la API
 
 ```markdown
@@ -311,8 +337,6 @@ it('usuario sin rol no accede a /proyectos', function () {
 ]
 ```
 
----
-
 ## 11. Problemas Comunes
 
 | Problema                                       | Solución                                                                 |
@@ -322,10 +346,6 @@ it('usuario sin rol no accede a /proyectos', function () {
 | Mail no enviado                               | Confirmar credenciales de Mailtrap                                       |
 | Token no válido en pruebas                    | Usar `createToken('nombre')->plainTextToken`                             |
 
----
-
 ## Conclusión
 
 Este proyecto sirve como base limpia para desarrollar microservicios REST con Laravel 12. Incluye autenticación con tokens, autorización por roles, pruebas automatizadas y documentación mínima. Es ideal para cursos, talleres y proyectos iniciales sin frontend.
-
----
