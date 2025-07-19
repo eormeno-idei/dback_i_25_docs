@@ -74,12 +74,121 @@ Si el archivo de base no existe, Laravel preguntará si desea crearlo.
 
 ## 3. Autenticación con Jetstream API
 
+Laravel 12 incluye Jetstream API, que proporciona una solución completa para autenticación y autorización. Esta implementación utiliza Laravel Sanctum para manejar tokens de acceso y autenticación de usuarios.
+
 Jetstream API:
 
 - Usa Laravel Sanctum
 - Agrega verificación de email
 - Usa `auth:sanctum` como middleware
 - Provee endpoints `/register`, `/login`, `/user`, etc.
+
+### 3.1. Instalar Laravel Sanctum
+
+```bash
+composer require laravel/sanctum
+```
+### 3.2. Publicar la configuración de Sanctum
+
+```bash
+php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+```
+### 3.3. Ejecutar las migraciones
+
+```bash
+php artisan migrate
+```
+### 3.4. Crear el controlador de autenticación
+
+```bash
+php artisan make:controller Api/AuthController
+```
+
+### 3.5. Definir las rutas de autenticación
+
+En routes/api.php, agrega:
+
+```php
+<?php
+use App\Http\Controllers\Api\AuthController;
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/user', [AuthController::class, 'user']);
+});
+```
+### 3.6. Implementar el AuthController
+
+```php
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\Controller;
+use Illuminate\Validation\ValidationException;
+
+class AuthController extends Controller {
+    public function register(Request $request) {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'user' => $user,
+            'token' => $token,
+            'token_type' => 'Bearer',
+        ], 201);
+    }
+
+    public function login(Request $request) {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            throw ValidationException::withMessages([
+                'email' => ['The provided credentials are incorrect.'],
+            ]);
+        }
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'user' => $user,
+            'token' => $token,
+            'token_type' => 'Bearer',
+        ]);
+    }
+
+    public function logout(Request $request) {
+        $request->user()->currentAccessToken()->delete();
+
+        return response()->json(['message' => 'Successfully logged out']);
+    }
+
+    public function user(Request $request) {
+        return response()->json($request->user());
+    }
+}
+```
 
 ## 4. Autorización con Spatie Permission
 
@@ -185,13 +294,31 @@ php artisan tinker
 
 ![alt text](image-2.png)
 
-## 7. Pruebas con Pest
+## 6. Pruebas con Pest
 
-### 7.1. Prueba de Registro y Login
+Si ejecutaste `laravel new` con la opción `--pest`, ya tienes Pest configurado. Si no, puedes instalarlo con:
+
+```bash
+composer require pestphp/pest --dev
+php artisan pest:install
+```
+
+Ejecuta las pruebas con:
+
+```bash
+php artisan test
+```
+
+Verás que se ejecutan las pruebas predefinidas de Jetstream y Pest y deberían pasar sin problemas.
+
+![alt text](image-3.png)
+
+### 6.1. Prueba de Registro y Login
 
 Archivo: `tests/Feature/AuthTest.php`
 
 ```php
+<?php
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
