@@ -109,16 +109,17 @@ Profesor titular de la materia Desarrollo Backend I
 Este repositorio incluye la siguiente documentación técnica:
 
 ### Documentos de Arquitectura
-- [`Descripción General del Software`](docs/Descripción%20General%20del%20Software.md) - Visión completa del sistema Difexa API
-- [`difexa-api-arch`](docs/difexa-api-arch.png) - Diagrama de arquitectura del sistema
+- [Microservicios](docs/microservices.md) - Descripción de la arquitectura de microservicios
+- [Descripción General del Software](docs/Descripción%20General%20del%20Software.md) - Visión completa del sistema Difexa API
+- [difexa-api-arch](docs/difexa-api-arch.png) - Diagrama de arquitectura del sistema
 
 ### Metodología y Desarrollo
-- [`Historias de Usuario para Difexa API`](docs/Historias%20de%20Usuario%20para%20Difexa%20API.md) - Casos de uso completos del sistema
-- [`Prompt para historias de usuario`](docs/Prompt%20para%20historias%20de%20usuario.md) - Guía para crear historias de usuario con criterios INVEST
+- [Historias de Usuario para Difexa API](docs/Historias%20de%20Usuario%20para%20Difexa%20API.md) - Casos de uso completos del sistema
+- [Prompt para historias de usuario](docs/Prompt%20para%20historias%20de%20usuario.md) - Guía para crear historias de usuario con criterios INVEST
 
 ### Guías Técnicas
-- [`Plantilla de Prompt para Generación de Rutas de Microservicios Laravel`](docs/Plantilla%20de%20Prompt%20para%20Generación%20de%20Rutas%20de%20Microservicios%20Laravel.md) - Template para generar código con Copilot
-- [`tutorial-laravel12-microservicios`](docs/tutorial-laravel12-microservicios.md) - Tutorial paso a paso del setup inicial
+- [Plantilla de Prompt para Generación de Rutas de Microservicios Laravel](docs/Plantilla%20de%20Prompt%20para%20Generación%20de%20Rutas%20de%20Microservicios%20Laravel.md) - Template para generar código con Copilot
+- [tutorial-laravel12-microservicios](docs/tutorial-laravel12-microservicios.md) - Tutorial paso a paso del setup inicial
 
 ### Tutoriales de Transición (Próximamente)
 - `mapeo-python-php.md` - Guía de transición de Python a PHP con ejemplos paralelos
