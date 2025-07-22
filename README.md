@@ -1,26 +1,24 @@
 # Desarrollo Backend I - Edición 2025
 ## Microservicios con Laravel y GitHub Copilot
 
-![Difexa API Architecture](docs/difexa-api-arch.png)
+## Descripción General
 
-## 📋 Descripción General
+Este repositorio contiene la documentación y materiales del curso **Desarrollo Backend I** correspondiente a la edición 2025. El objetivo principal de la materia es enseñar a los estudiantes cómo desarrollar una API de microservicios utilizando Laravel. En esta edición se utilizará **vibe-coding** junto con **GitHub Copilot** para guiar eficientemente el desarrollo.
 
-Este repositorio contiene la documentación y materiales del curso **Desarrollo Backend I** correspondiente a la edición 2025. El objetivo principal de la materia es enseñar a los estudiantes cómo utilizar **vibe-coding** junto con **GitHub Copilot** para guiar eficientemente el desarrollo de una API de microservicios utilizando Laravel.
-
-## 🎯 Objetivos de Aprendizaje
+## Objetivos de Aprendizaje
 
 ### Objetivo Principal
-Dominar el uso de GitHub Copilot como herramienta de asistencia en el desarrollo de APIs REST robustas y escalables, aplicando metodologías ágiles y mejores prácticas de la industria.
+Que los estudiantes aprendan a desarrollar una API REST de microservicios utilizando Laravel 12, aprovechando GitHub Copilot como asistente de codificación para mejorar la productividad y calidad del código.
 
 ### Objetivos Específicos
 - **Desarrollo Guiado por IA**: Aprender a utilizar GitHub Copilot para acelerar el desarrollo de microservicios
 - **Arquitectura de Microservicios**: Diseñar y implementar APIs REST siguiendo patrones arquitectónicos modernos
-- **Framework Laravel**: Dominar Laravel 12 para el desarrollo de APIs sin frontend
+- **Framework Laravel**: Conocer los elementos más importantes de Laravel 12 para el desarrollo de APIs sin frontend
 - **Metodologías Ágiles**: Aplicar historias de usuario y criterios INVEST en el desarrollo
 - **Autenticación y Autorización**: Implementar sistemas seguros con Bearer Tokens y control de roles
-- **Testing**: Desarrollar pruebas automatizadas con Pest
+- **Testing**: Desarrollar pruebas automatizadas con el framework Pest
 
-## 🏗️ Proyecto de Práctica: Difexa API
+## Proyecto de Práctica: Difexa API
 
 ### Descripción del Sistema
 **Difexa API** es un sistema backend orientado a la gestión y automatización de la difusión de información académica de la Facultad de Ciencias Exactas, Físicas y Naturales. 
@@ -32,7 +30,7 @@ Dominar el uso de GitHub Copilot como herramienta de asistencia en el desarrollo
 - **Integración con IA** para generación automática de contenido
 - **Gestión de usuarios** con múltiples roles y permisos
 - **Gestión de canales** temáticos de difusión
-- **Publicaciones multimedia** con aprobación workflow
+- **Publicaciones multimedia** con un flujo de aprobación
 
 ### Roles del Sistema
 - **Invitados**: Registro y solicitud de autorización
@@ -41,7 +39,7 @@ Dominar el uso de GitHub Copilot como herramienta de asistencia en el desarrollo
 - **Administradores**: Gestión completa del sistema
 - **Dispositivos**: Consumo de contenido para pantallas físicas
 
-## 🛠️ Stack Tecnológico
+## Stack Tecnológico
 
 ### Backend Framework
 - **Laravel 12** (última versión estable)
@@ -64,7 +62,7 @@ Dominar el uso de GitHub Copilot como herramienta de asistencia en el desarrollo
 - **Migraciones** y **Seeders** de Laravel
 - **Factory patterns** para datos de prueba
 
-## 📚 Contenido del Curso
+## Contenido del Curso
 
 ### Módulo 0: Sincronización de Conocimientos Previos
 - **Transición de Python a PHP**: Tutorial de mapeo de conceptos y sintaxis
@@ -96,7 +94,7 @@ Dominar el uso de GitHub Copilot como herramienta de asistencia en el desarrollo
 - Documentación automática de endpoints
 - Validación de criterios de aceptación
 
-## 👥 Equipo de Cátedra
+## Equipo de Cátedra
 
 ### Profesor Responsable
 **Emilio Ormeño**  
@@ -104,30 +102,29 @@ Profesor titular de la materia Desarrollo Backend I
 
 ### Equipo de Ayudantes
 - **Martín Varela Ochoa** - Ayudante de cátedra
-- **María Scheffer** - Ayudante de cátedra  
-- **Claudio Alessio** - Ayudante de cátedra
+- **María Scheffer** - Ayudante de cátedra
 
-## 📖 Documentación Disponible
+## Documentación Disponible
 
 Este repositorio incluye la siguiente documentación técnica:
 
 ### Documentos de Arquitectura
-- [`Descripción General del Software.md`](docs/Descripción%20General%20del%20Software.md) - Visión completa del sistema Difexa API
-- [`difexa-api-arch.png`](docs/difexa-api-arch.png) - Diagrama de arquitectura del sistema
+- [`Descripción General del Software`](docs/Descripción%20General%20del%20Software.md) - Visión completa del sistema Difexa API
+- [`difexa-api-arch`](docs/difexa-api-arch.png) - Diagrama de arquitectura del sistema
 
 ### Metodología y Desarrollo
-- [`Historias de Usuario para Difexa API.md`](docs/Historias%20de%20Usuario%20para%20Difexa%20API.md) - Casos de uso completos del sistema
-- [`Prompt para historias de usuario.md`](docs/Prompt%20para%20historias%20de%20usuario.md) - Guía para crear historias de usuario con criterios INVEST
+- [`Historias de Usuario para Difexa API`](docs/Historias%20de%20Usuario%20para%20Difexa%20API.md) - Casos de uso completos del sistema
+- [`Prompt para historias de usuario`](docs/Prompt%20para%20historias%20de%20usuario.md) - Guía para crear historias de usuario con criterios INVEST
 
 ### Guías Técnicas
-- [`Plantilla de Prompt para Generación de Rutas de Microservicios Laravel.md`](docs/Plantilla%20de%20Prompt%20para%20Generación%20de%20Rutas%20de%20Microservicios%20Laravel.md) - Template para generar código con Copilot
-- [`tutorial-laravel12-microservicios.md`](docs/tutorial-laravel12-microservicios.md) - Tutorial paso a paso del setup inicial
+- [`Plantilla de Prompt para Generación de Rutas de Microservicios Laravel`](docs/Plantilla%20de%20Prompt%20para%20Generación%20de%20Rutas%20de%20Microservicios%20Laravel.md) - Template para generar código con Copilot
+- [`tutorial-laravel12-microservicios`](docs/tutorial-laravel12-microservicios.md) - Tutorial paso a paso del setup inicial
 
 ### Tutoriales de Transición (Próximamente)
 - `mapeo-python-php.md` - Guía de transición de Python a PHP con ejemplos paralelos
 - `sql-eloquent-orm.md` - Equivalencias entre consultas SQL y Eloquent ORM
 
-## 🚀 Metodología de Trabajo
+## Metodología de Trabajo
 
 ### Vibe-Coding con GitHub Copilot
 El curso enfatiza el uso de **vibe-coding**, una metodología que combina:
@@ -144,7 +141,7 @@ El curso enfatiza el uso de **vibe-coding**, una metodología que combina:
 5. **Testing** automatizado de la funcionalidad
 6. **Validación** contra criterios de aceptación
 
-## 📋 Requisitos Previos
+## Requisitos Previos
 
 ### Conocimientos de Base
 - **Programación en Python** (nivel intermedio)
@@ -161,7 +158,7 @@ El curso enfatiza el uso de **vibe-coding**, una metodología que combina:
 - Editor de código con GitHub Copilot
 - Cuenta en GitHub con acceso a Copilot
 
-## 🎓 Evaluación
+## Evaluación
 
 La evaluación del curso se basará en:
 - **Desarrollo del proyecto Difexa API** (60%)
@@ -169,12 +166,10 @@ La evaluación del curso se basará en:
 - **Testing y documentación** (10%)
 - **Participación y metodología ágil** (10%)
 
-## 📞 Contacto y Soporte
+## Contacto y Soporte
 
-Para consultas académicas y técnicas, contactar al equipo de cátedra a través de los canales oficiales de la facultad.
-
----
+Para consultas académicas y técnicas, contactar al equipo de cátedra a través del grupo de Whatsapp
 
 **Facultad de Ciencias Exactas, Físicas y Naturales**  
-**Universidad Nacional de Córdoba**  
+**Universidad Nacional de San Juan**  
 **Año 2025**
