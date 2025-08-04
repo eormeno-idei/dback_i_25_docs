@@ -62,6 +62,47 @@ Que los estudiantes aprendan a desarrollar una API REST de microservicios utiliz
 - **Migraciones** y **Seeders** de Laravel
 - **Factory patterns** para datos de prueba
 
+### Herramientas de Desarrollo
+- **Visual Studio Code** con extensiones instaladas:
+  - **GitHub Copilot** - Asistente de IA para generación de código
+  - **GitHub Copilot Chat** - Chat interactivo con IA para desarrollo
+  - **GitHub Pull Requests and Issues** - Gestión de pull requests y issues desde VS Code
+  - **PHP Tools** (DEVSENSE) - Suite completa de herramientas PHP con IntelliSense avanzado
+  - **PHP IntelliSense** (Damjan Cvetko) - Autocompletado y análisis de código PHP
+  - **PHP Debug** (Xdebug) - Debugging de aplicaciones PHP
+  - **Laravel Extension Pack** - Paquete de extensiones para desarrollo Laravel
+  - **Laravel Blade Snippets** - Snippets y resaltado de sintaxis para Blade
+  - **Laravel Artisan** - Comandos Artisan integrados en VS Code
+  - **Laravel Goto View** - Navegación rápida a vistas Laravel
+  - **Laravel Goto Components** - Navegación a componentes Laravel
+  - **Laravel Create View** - Creación rápida de vistas Blade
+  - **Laravel Jump Controller** - Navegación rápida entre controladores y rutas
+  - **Laravel Extra Intellisense** - IntelliSense adicional para Laravel
+  - **Laravel Blade Wrapper** - Herramientas adicionales para Blade
+  - **Laravel Blade Formatter** - Formateo automático de archivos Blade
+  - **Tailwind CSS IntelliSense** - Autocompletado para clases de Tailwind CSS
+  - **DotEnv** - Resaltado de sintaxis para archivos .env
+  - **EditorConfig** - Soporte para configuración de editor consistente
+  - **Database Client JDBC** - Cliente de base de datos con soporte JDBC
+  - **MySQL Client** - Cliente específico para bases de datos MySQL
+  - **SQLite3 Editor** - Editor y visor para bases de datos SQLite
+  - **Todo Tree** - Visualización de comentarios TODO en el código
+  - **Remote - WSL** - Desarrollo en Windows Subsystem for Linux
+  - **Material Icon Theme** - Iconos Material Design para el explorador
+  - **VSCode Icons** - Conjunto completo de iconos para archivos y carpetas
+  - **Markdown Editor** - Editor enriquecido para archivos Markdown
+  - **Markdown Preview Enhanced** - Vista previa avanzada de Markdown
+  - **Markdown Toolbar** - Barra de herramientas para edición de Markdown
+  - **Paste Image** - Pegado rápido de imágenes en documentos
+  - **SVG Preview** - Vista previa de archivos SVG
+  - **HTML Preview** - Vista previa de archivos HTML
+  - **Shell Format** - Formateo de scripts de shell
+
+### Requisitos para GitHub Copilot
+- **Email institucional**: Solicitar a través del formulario: https://forms.gle/vWNFnUUdF2t839yE7
+- **Acceso al webmail**: Una vez obtenido el email institucional, acceder a través de: https://correo.unsj.edu.ar/roundcube/
+- **Configuración**: Seguir los pasos detallados en el documento [Pasos para obtener GitHub Copilot gratis como estudiante](docs/Pasos%20para%20obtener%20GitHub%20Copilot%20gratis%20como%20estudiante.pdf)
+
 ## Contenido del Curso
 
 ### Módulo 0: Sincronización de Conocimientos Previos
